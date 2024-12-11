@@ -1,6 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg2">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Profile Image -->
+
+    <ImageView
+        android:id="@+id/icon_back"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="Back Icon"
+        android:src="@drawable/ic_back_arrow" />
+
+
+    <TextView
+        android:id="@+id/tv_food_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Scan Your Food"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginStart="0dp"
+        android:layout_height="500dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp">
+
+        <ImageView
+            android:id="@+id/food_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/food" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Horizontal Layout for Buttons -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="610dp"
+        android:orientation="horizontal">
+
+        <!-- Button to Open File -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btnOpenFile"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:contentDescription="Open File"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_folder" />
+
+            <TextView
+                android:id="@+id/tv_open_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:text="Image"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Button to Take Picture -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btnTakePicture"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:contentDescription="Take Picture"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_camera" />
+
+            <TextView
+                android:id="@+id/tv_take_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:text="Take Pict"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

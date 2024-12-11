@@ -6,13 +6,14 @@ import com.anggiiqna.polafit.network.datamodel.RegisterRequest
 import com.anggiiqna.polafit.network.datamodel.RegisterResponse
 import com.anggiiqna.polafit.network.datamodel.UserResponse
 import com.anggiiqna.polafit.network.datamodel.UserRequest
+import okhttp3.MultipartBody
+import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Multipart
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Part
-import retrofit2.http.Multipart
-import okhttp3.MultipartBody
-import retrofit2.http.Body
-import retrofit2.http.POST
-import retrofit2.http.GET
 import retrofit2.http.PUT
 
 interface ApiService {
@@ -34,4 +35,8 @@ interface ApiService {
         @Part phone: MultipartBody.Part,
         @Part image: MultipartBody.Part
     ): UserRequest
+
+    @Multipart
+    @POST("/predict_food")
+    fun predictFood(@Part file: MultipartBody.Part): Call<ScanResponse>
 }
