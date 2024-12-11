@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icon_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:contentDescription="Back Icon"
+            android:src="@drawable/ic_back_arrow" />
+
+        <TextView
+            android:id="@+id/tv_profile_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="About App"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/icon_back"
+        android:layout_marginTop="80dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/logo"
+                android:contentDescription="App Logo"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/about_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#555555"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:padding="16dp"
+                android:text="PolaFit is an app that utilizes Convolutional Neural Network (CNN) technology to detect food and provide exercise recommendations according to user inputs. The app helps you choose a healthy diet and effective exercise routine based on your fitness goals.\n\nKey Features\n\n- Automatic detection of food using CNN.\n- Exercise recommendations tailored to food choices and fitness goals.\n- Monitoring of user's diet and exercise progress.\n\nDevelopment Team\n\n(ML) M120B4KY3283 – Naufal El Kamil Aditya Pratama Rahman\n(ML) M120B4KY1123 – Didin Roy Chafihudin\n(ML) M120B4KX4043 – Salsabila Septi Sukmayanti\n(CC) C120B4KY2009 – Irsyam Okta Pratama Riyadi\n(CC) C012B4KY0161 – Afnan Yusuf\n(MD) A120B4KX3549 – R. Auliya Catur Silvia\n(MD) A120B4KX0552 – Anggi Iqna Aryahyah\n\nVersion 1.0.0\n\nCopyright © 2024 PolaFit"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
