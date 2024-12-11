@@ -1,1 +1,1 @@
-# md-pola
+# polafit-mobile-development

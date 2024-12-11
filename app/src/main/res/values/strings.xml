@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Polafit</string>
+    <string name="enter_your_username_here">Enter your username here!</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="enter_your_password_here">Enter your password here!</string>
+    <string name="log_in">Log In</string>
+</resources>

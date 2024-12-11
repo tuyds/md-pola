@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg2">
+
+    <ImageView
+        android:id="@+id/icon_back"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="Back Icon"
+        android:src="@drawable/ic_back_arrow" />
+
+    <TextView
+        android:id="@+id/tv_profile_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Data"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:text="Fill in your data here!"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="100dp"
+        android:text="Height (cm)"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btn_height"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:textColor="@color/abuAbu"
+        android:layout_below="@id/tv_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp" />
+
+    <EditText
+        android:id="@+id/et_height"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginStart="55dp" />
+
+    <TextView
+        android:id="@+id/tv_Weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="170dp"
+        android:text="Weight (kg)"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btn_weight"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:textColor="@color/abuAbu"
+        android:layout_below="@id/tv_Weight"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp" />
+
+    <EditText
+        android:id="@+id/et_weight"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="195dp"
+        android:layout_marginStart="60dp" />
+
+    <TextView
+        android:id="@+id/tv_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="240dp"
+        android:text="Duration (minutes)"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btn_duration"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:textColor="@color/abuAbu"
+        android:layout_below="@id/tv_duration"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp" />
+
+    <EditText
+        android:id="@+id/et_duration"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="265dp"
+        android:layout_marginStart="60dp" />
+
+    <TextView
+        android:id="@+id/tv_calori"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="310dp"
+        android:text="Calories Burned"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btn_calori"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:textColor="@color/abuAbu"
+        android:layout_below="@id/tv_calori"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp" />
+
+    <EditText
+        android:id="@+id/et_calori"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="325dp"
+        android:layout_marginStart="60dp" />
+
+    <TextView
+        android:id="@+id/tv_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="380dp"
+        android:text="Age"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btn_age"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:textColor="@color/abuAbu"
+        android:layout_below="@id/tv_age"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp" />
+
+    <EditText
+        android:id="@+id/et_age"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="395dp"
+        android:layout_marginStart="60dp" />
+
+    <LinearLayout
+        android:layout_width="300sp"
+        android:layout_height="150sp"
+        android:background="@color/abuAbu"
+        android:orientation="vertical"
+        android:layout_below="@+id/et_age"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="60dp">
+
+        <TextView
+            android:id="@+id/textcheckbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Activity Level"
+            android:textColor="@color/black"/>
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rendah" />
+
+        <CheckBox
+            android:id="@+id/checkbox2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sedang" />
+
+        <CheckBox
+            android:id="@+id/checkbox3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tinggi" />
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="750dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_blue2_button"
+        android:text="Save"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+</RelativeLayout>
+
