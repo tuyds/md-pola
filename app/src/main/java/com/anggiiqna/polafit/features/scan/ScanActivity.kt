@@ -2,6 +2,7 @@ package com.anggiiqna.polafit.features.scan
 
 import android.Manifest
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -18,9 +19,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
+import com.anggiiqna.polafit.HomeActivity
 import com.anggiiqna.polafit.R
+import com.anggiiqna.polafit.network.ApiClient
 import com.anggiiqna.polafit.network.ApiService
-import com.anggiiqna.polafit.network.RetrofitClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -50,13 +52,19 @@ class ScanActivity : AppCompatActivity() {
         setContentView(R.layout.activity_scan)
 
         // Initialize Retrofit API service
-        apiService = RetrofitClient.create()
+        apiService = ApiClient.createSecondary()
 
         // Initialize views
         foodImageView = findViewById(R.id.food_image)
-
         val btnTakePicture: ImageButton = findViewById(R.id.btnTakePicture)
         val btnOpenFile: ImageButton = findViewById(R.id.btnOpenFile)
+        val backButton: ImageView = findViewById(R.id.icon_back)
+
+        backButton.setOnClickListener {
+            val intent = Intent(this@ScanActivity, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         btnTakePicture.setOnClickListener {
             if (checkCameraPermission()) {
@@ -216,6 +224,12 @@ class ScanActivity : AppCompatActivity() {
             return
         }
 
+        // Show loading indicator before API call
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Uploading image...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
         val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val imagePart = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
@@ -223,10 +237,12 @@ class ScanActivity : AppCompatActivity() {
             try {
                 val response = apiService.predictFood(imagePart)
                 withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
                     if (response.isSuccessful) {
                         val predictionResult = response.body()
                         val resultIntent = Intent(this@ScanActivity, ScanResultActivity::class.java)
                         resultIntent.putExtra("Makanan", predictionResult?.Makanan)
+                        resultIntent.putExtra("ImageUri", uri.toString())
                         startActivity(resultIntent)
                     } else {
                         Toast.makeText(
@@ -237,8 +253,9 @@ class ScanActivity : AppCompatActivity() {
                     }
                 }
             } catch (e: Exception) {
-                Log.e("ScanActivity", "Error uploading image", e)
                 withContext(Dispatchers.Main) {
+                    progressDialog.dismiss()
+                    Log.e("ScanActivity", "Error uploading image", e)
                     Toast.makeText(this@ScanActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
