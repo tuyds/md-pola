@@ -127,8 +127,22 @@ class ScanActivity : AppCompatActivity() {
 
     private fun createImageFile(): File {
         val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
-        val storageDir = getExternalFilesDir(null)
-        return File.createTempFile("JPEG_${timestamp}_", ".jpg", storageDir)
+        // Use getExternalFilesDir() to ensure the directory exists and is accessible
+        val storageDir = File(getExternalFilesDir(null), "my_images")
+
+        // Create the directory if it doesn't exist
+        if (!storageDir.exists()) {
+            storageDir.mkdirs()
+        }
+
+        return File.createTempFile(
+            "JPEG_${timestamp}_",
+            ".jpg",
+            storageDir
+        ).apply {
+            // Ensure the file is readable
+            setReadable(true, false)
+        }
     }
 
     private fun openGallery() {
@@ -142,13 +156,32 @@ class ScanActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 REQUEST_CAMERA -> {
-                    foodImageView.setImageURI(photoUri)
-                    uploadImage(photoUri)
+                    // Use photoUri that was set during camera intent
+                    if (photoUri != null) {
+                        try {
+                            Log.d("ScanActivity", "Camera URI: $photoUri")
+                            Log.d("ScanActivity", "URI Path: ${photoUri?.path}")
+                            Log.d("ScanActivity", "File exists: ${File(photoUri?.path ?: "").exists()}")
+
+                            foodImageView.setImageURI(null)
+                            foodImageView.setImageURI(photoUri)
+                            uploadImage(photoUri)
+                        } catch (e: Exception) {
+                            Log.e("ScanActivity", "Error setting camera image", e)
+                            Toast.makeText(this, "Failed to process image: ${e.message}", Toast.LENGTH_LONG).show()
+                        }
+                    } else {
+                        Toast.makeText(this, "No photo captured", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 REQUEST_GALLERY -> {
                     val selectedImage: Uri? = data?.data
-                    foodImageView.setImageURI(selectedImage)
-                    uploadImage(selectedImage)
+                    if (selectedImage != null) {
+                        foodImageView.setImageURI(selectedImage)
+                        uploadImage(selectedImage)
+                    } else {
+                        Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         } else {
@@ -162,9 +195,24 @@ class ScanActivity : AppCompatActivity() {
             return
         }
 
-        val file = File(getRealPathFromURI(uri))
+        val filePath = getRealPathFromURI(uri)
+        Log.d("ScanActivity", "Attempting to upload file: $filePath")
+
+        val file = File(filePath)
+
         if (!file.exists()) {
-            Toast.makeText(this, "File not found: ${file.absolutePath}", Toast.LENGTH_SHORT).show()
+            Log.e("ScanActivity", "File does not exist: $filePath")
+
+            // Additional debugging - list files in the directory
+            val parentDir = file.parentFile
+            if (parentDir?.exists() == true) {
+                Log.d("ScanActivity", "Files in directory:")
+                parentDir.listFiles()?.forEach {
+                    Log.d("ScanActivity", "Found file: ${it.absolutePath}")
+                }
+            }
+
+            Toast.makeText(this, "File not found: $filePath", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -189,7 +237,7 @@ class ScanActivity : AppCompatActivity() {
                     }
                 }
             } catch (e: Exception) {
-                Log.e("ScanActivity", "Error updating profile", e) // Log the error
+                Log.e("ScanActivity", "Error uploading image", e)
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@ScanActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
@@ -198,9 +246,37 @@ class ScanActivity : AppCompatActivity() {
     }
 
     private fun getRealPathFromURI(uri: Uri): String {
-        val cursor = contentResolver.query(uri, null, null, null, null)
-        cursor?.moveToFirst()
-        val index = cursor?.getColumnIndex(MediaStore.Images.Media.DATA)
-        return cursor?.getString(index ?: -1) ?: ""
+        // For camera captures, prioritize the exact path
+        val path = uri.path ?: ""
+        Log.d("ScanActivity", "Attempting to get path: $path")
+
+        // If the path starts with /my_images, try to find the full absolute path
+        if (path.contains("/my_images/")) {
+            val fileName = path.substringAfterLast("/")
+            val storageDir = File(getExternalFilesDir(null), "my_images")
+            val file = File(storageDir, fileName)
+
+            Log.d("ScanActivity", "Constructed file path: ${file.absolutePath}")
+            Log.d("ScanActivity", "File exists: ${file.exists()}")
+
+            return file.absolutePath
+        }
+
+        // Fallback to content resolver method
+        try {
+            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = contentResolver.query(uri, filePathColumn, null, null, null)
+            cursor?.use {
+                if (it.moveToFirst()) {
+                    val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                    return it.getString(columnIndex)
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("ScanActivity", "Error getting path from URI", e)
+        }
+
+        // If all else fails, return the original path
+        return path
     }
 }
