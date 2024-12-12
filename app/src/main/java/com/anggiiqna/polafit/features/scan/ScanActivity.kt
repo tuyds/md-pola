@@ -241,7 +241,17 @@ class ScanActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val predictionResult = response.body()
                         val resultIntent = Intent(this@ScanActivity, ScanResultActivity::class.java)
+
+
+
                         resultIntent.putExtra("Makanan", predictionResult?.Makanan)
+                        resultIntent.putExtra("Berat_per_Serving", predictionResult?.Berat_per_Serving)
+                        resultIntent.putExtra("Kalori", predictionResult?.Kalori)
+                        resultIntent.putExtra("Protein", predictionResult?.Protein)
+                        resultIntent.putExtra("Lemak", predictionResult?.Lemak)
+                        resultIntent.putExtra("Karbohidrat", predictionResult?.Karbohidrat)
+                        resultIntent.putExtra("Serat", predictionResult?.Serat)
+                        resultIntent.putExtra("Gula", predictionResult?.Gula)
                         resultIntent.putExtra("ImageUri", uri.toString())
                         startActivity(resultIntent)
                     } else {
