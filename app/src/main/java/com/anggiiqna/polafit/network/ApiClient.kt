@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
     private const val BASE_URL = "https://polafit-cloud-computing-357126485159.asia-southeast2.run.app/"
-    private const val SECOND_BASE_URL = "https://polafit-machine-learning-357126485159.asia-southeast2.run.app/"
+    private const val BASE_URL_ML = "https://polafit-machine-learning-357126485159.asia-southeast2.run.app/"
 
     fun create(): ApiService {
         return Retrofit.Builder()
@@ -17,16 +17,17 @@ object ApiClient {
             .create(ApiService::class.java)
     }
 
-    fun createSecondary(): ApiService {
+    fun createML(): ApiService {
         val httpClient = OkHttpClient.Builder()
             .callTimeout(2, TimeUnit.MINUTES)  // Set timeout to 2 minutes
             .build()
 
         return Retrofit.Builder()
-            .baseUrl(SECOND_BASE_URL)
+            .baseUrl(BASE_URL_ML)
             .client(httpClient)  // Use the custom client with a timeout
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
     }
 }
+

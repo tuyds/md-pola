@@ -52,7 +52,7 @@ class ScanActivity : AppCompatActivity() {
         setContentView(R.layout.activity_scan)
 
         // Initialize Retrofit API service
-        apiService = ApiClient.createSecondary()
+        apiService = ApiClient.createML()
 
         // Initialize views
         foodImageView = findViewById(R.id.food_image)
