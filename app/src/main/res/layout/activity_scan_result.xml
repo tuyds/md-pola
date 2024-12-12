@@ -4,9 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg2">
-
+<!--This activity_scan_result.xml-->
     <!-- Profile Image -->
-
     <ImageView
         android:id="@+id/icon_back"
         android:layout_width="24dp"
@@ -106,9 +105,10 @@
                 android:textColor="#666666" />
 
             <TextView
+                android:id="@+id/serving_size_result"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100 Gram"
+                android:text="100Gram"
                 android:textColor="#000000"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -124,9 +124,6 @@
         android:columnCount="2"
         android:rowCount="4"
         >
-
-
-
 
         <!-- Calories -->
         <LinearLayout
@@ -158,6 +155,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/calories_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="615 Kcal"
@@ -196,6 +194,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/carbo_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="615 Gram"
@@ -234,6 +233,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/protein_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="615 Gram"
@@ -272,6 +272,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/sugar_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="615 Gram"
@@ -310,6 +311,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/fat_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="615 Kcal"
@@ -348,6 +350,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/fiber_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="615 Gram"
